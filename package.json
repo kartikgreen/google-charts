@@ -16,7 +16,12 @@
   },
   "dependencies": {
     "@stencil/core": "next",
-    "@stencil/router": "latest"
+    "@stencil/router": "latest",
+    "@swimlane/ngx-charts": "^7.0.1",
+    "chart.js": "^2.7.1",
+    "flatpickr": "^4.2.3",
+    "ng2-charts": "^1.6.0",
+    "stencil-fetch": "0.0.4"
   },
   "devDependencies": {
     "@stencil/dev-server": "latest",
