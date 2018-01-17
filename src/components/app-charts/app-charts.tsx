@@ -79,7 +79,7 @@ export class AppCharts {
     console.log(event.target.value);
     this.selectCountry = event.target.value;
   }
-  handleCheckBox(event) {
+  handleCategories(event) {
     const obj = {};
     obj[event.target.value] = event.target.checked;
     if (event.target.checked) {
@@ -95,42 +95,42 @@ export class AppCharts {
   }
   handlePlace(event) {
     if (event.target.value === 'region') {
-      this.removeAttribute('#region', 'disabled');
-      this.setAttribute('#country', 'disabled');
-      this.setAttribute('#city', 'disabled');
-      this.setAttribute('#zip', 'disabled');
-      this.setAttribute('#address_one', 'disabled');
-      this.setAttribute('#address_two', 'disabled');
+      this.deleteAttribute('#region', 'disabled');
+      this.addAttribute('#country', 'disabled');
+      this.addAttribute('#city', 'disabled');
+      this.addAttribute('#zip', 'disabled');
+      this.addAttribute('#address_one', 'disabled');
+      this.addAttribute('#address_two', 'disabled');
     }
     if (event.target.value === 'country') {
-      this.removeAttribute('#country', 'disabled');
-      this.setAttribute('#region', 'disabled');
-      this.setAttribute('#city', 'disabled');
-      this.setAttribute('#zip', 'disabled');
-      this.setAttribute('#address_one', 'disabled');
-      this.setAttribute('#address_two', 'disabled');
+      this.deleteAttribute('#country', 'disabled');
+      this.addAttribute('#region', 'disabled');
+      this.addAttribute('#city', 'disabled');
+      this.addAttribute('#zip', 'disabled');
+      this.addAttribute('#address_one', 'disabled');
+      this.addAttribute('#address_two', 'disabled');
     }
     if (event.target.value === 'city') {
-      this.removeAttribute('#city', 'disabled');
-      this.setAttribute('#region', 'disabled');
-      this.setAttribute('#country', 'disabled');
-      this.setAttribute('#zip', 'disabled');
-      this.setAttribute('#address_one', 'disabled');
-      this.setAttribute('#address_two', 'disabled');
+      this.deleteAttribute('#city', 'disabled');
+      this.addAttribute('#region', 'disabled');
+      this.addAttribute('#country', 'disabled');
+      this.addAttribute('#zip', 'disabled');
+      this.addAttribute('#address_one', 'disabled');
+      this.addAttribute('#address_two', 'disabled');
     }
     if (event.target.value === 'address') {
-      this.setAttribute('#city', 'disabled');
-      this.setAttribute('#region', 'disabled');
-      this.setAttribute('#country', 'disabled');
-      this.removeAttribute('#zip', 'disabled');
-      this.removeAttribute('#address_one', 'disabled');
-      this.removeAttribute('#address_two', 'disabled');
+      this.addAttribute('#city', 'disabled');
+      this.addAttribute('#region', 'disabled');
+      this.addAttribute('#country', 'disabled');
+      this.deleteAttribute('#zip', 'disabled');
+      this.deleteAttribute('#address_one', 'disabled');
+      this.deleteAttribute('#address_two', 'disabled');
     }
   }
-  removeAttribute(element, attribute) {
+  deleteAttribute(element, attribute) {
     this.hostElement.querySelector(element).removeAttribute(attribute);
   }
-  setAttribute(element, attribute) {
+  addAttribute(element, attribute) {
     this.hostElement.querySelector(element).setAttribute(attribute, '');
   }
   render() {
@@ -153,7 +153,7 @@ export class AppCharts {
                 this.categories.map(res => 
                   <label>
                     {res}:
-                    <input type="checkbox" name={res} value={res} onChange={(e) => this.handleCheckBox(e)} />
+                    <input type="checkbox" name={res} value={res} onChange={(e) => this.handleCategories(e)} />
                   </label>
                 )
               }
