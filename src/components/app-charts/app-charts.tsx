@@ -9,8 +9,7 @@ export class AppCharts {
   @Element() hostElement: HTMLElement;
   @State() selectCountry: string;
   @State() selectRegion: string;
-  categories = ['All', 'Sports', 'Entertainment', 'Business', 'Travel Alerts',
-   'Weather', 'Holidays', 'Political'];
+  categories = [{id:1, value: 'Sports'}, {id:2, value: 'Politics'}, {id:3, value: 'Bussiness'}, {id:4, value: 'EnterTainment'}];
   categoriesSelected = [];
   region = ['Europe', 'Asia', 'Africa'];
   countryList = ['USA', 'IND', 'PAK'];
@@ -80,18 +79,16 @@ export class AppCharts {
     this.selectCountry = event.target.value;
   }
   handleCategories(event) {
-    const obj = {};
-    obj[event.target.value] = event.target.checked;
     if (event.target.checked) {
-      this.categoriesSelected.push(obj);
+      if (event.target.value === 'All') {
+        console.log('cat val', this.categories.map(m => m.id));
+        this.selectAll()
+        return;
+      }
+      this.categoriesSelected.push(event.target.value);
       return;
     }
-    const key = Object.keys(obj);
-    this.categoriesSelected = this.categoriesSelected.reduce(function(arr, item){
-    if(!(Object.keys(item).indexOf(key[0])!=-1))
-      arr.push(item);
-      return arr;
-    },[]);
+    this.categoriesSelected = this.categoriesSelected.filter(r => r != event.target.value);
   }
   handlePlace(event) {
     if (event.target.value === 'region') {
@@ -133,6 +130,20 @@ export class AppCharts {
   addAttribute(element, attribute) {
     this.hostElement.querySelector(element).setAttribute(attribute, '');
   }
+   selectAll() {
+    const checkboxes = this.hostElement.querySelectorAll('.categories');
+    // checkboxes[0].setAttribute("checked", "checked");
+    console.log('checkboxes.length', checkboxes.length);
+    let i = 0;
+    while(i <= checkboxes.length) {
+    console.log('called');
+      checkboxes[i].setAttribute("checked", "checked");
+    }
+	}
+  checkAllBox(element, attribute) {
+    const cb = this.hostElement.querySelectorAll(element);
+    cb[0].setAttribute(attribute, 'true');
+  }
   render() {
     return (
       <div>
@@ -149,11 +160,15 @@ export class AppCharts {
           </label>
           <h4>Show all the following categories</h4>
             <div class="checkbox-group">
+            <label>
+                All:
+              <input onChange={(e) => this.handleCategories(e)} type="checkbox" name= 'All' value='All' />
+            </label>
               {
                 this.categories.map(res => 
                   <label>
-                    {res}:
-                    <input type="checkbox" name={res} value={res} onChange={(e) => this.handleCategories(e)} />
+                    {res.value}:
+                    <input type="checkbox" class="categories" name={res.value} value={res.id} onChange={(e) => this.handleCategories(e)} />
                   </label>
                 )
               }
