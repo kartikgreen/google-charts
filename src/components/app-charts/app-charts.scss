@@ -23,5 +23,140 @@ app-charts {
       box-shadow: 0 3px 6px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.1);
       transform: translateY(1px);
     }
+    .events-widget {
+      display: block;
+      border: 2px solid #569ff7;
+    border-radius: 25px;
+
+    }
+    .events-widget .wid-block{
+      float: left;
+    display: block;
+    padding: 0px;
+    min-height: 250px;
+    position: relative;
+
+    }
+    .events-widget .wid-block:after {
+      content: '';
+    display: block;
+    background: #569ff7;
+    height: 200px;
+    width: 2px;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    margin-top: -50px;
+    }
+    .events-widget .wid-block:after:last-child {content:'';display: none!important;}
+    .events-widget .widget-block-1{
+      width: 25%;
+
+    }
+    .events-widget .widget-block-1 label {display: block;    margin-bottom: 10px;}
+    .events-widget .widget-block-1 input {display: inline-block}
+    .events-widget .widget-block-1 label .text-label  {
+      width: 100px;
+    display: inline-block;
+
+    }
+    .events-widget .widget-block-2{
+      width: 30%;
+
+    }
+    .events-widget .widget-block-2 .checkbox-group {
+      display: block;
+          padding: 0px;
+      
+    }
+    .events-widget .widget-block-2 .checkbox-group label {
+        display:block;
+     }
+     .events-widget .widget-block-2 .checkbox-group input{
+          display: inline-block;
+     }
+    .events-widget .widget-block-3{
+      width: 35%;
+
+    }
+    .events-widget .widget-block-3 .radio-group {
+      display: block
+    }
+    .events-widget .widget-block-3 .radio-group  label{
+      display: block;
+      margin-bottom: 10px;
+    }
+    .events-widget .widget-block-3 .radio-group  label input{
+      display: inline-block;
+    }
+    .events-widget .widget-block-3 .radio-group  label select{
+      display: inline-block;
+    }
+    .events-widget .widget-block-3 .radio-group  label .label-text {
+      display: inline-block;
+      width: 120px;
+    }
+        .events-widget .widget-block-4{
+      width: 10%;
+
+    }
+
+    .events-widget h4{
+      display: block
+
+    }
+    .clearfix {clear:both;}
+    .chart-block {
+      border: 1px solid #ddd;
+      padding: 25px;
+          margin-top: 50px;
+
+    }
+    .chart-block .chart-wrapper{
+      width: 33.33%;
+      display: block;
+      float: left;
+
+    }
+    .price-table {
+       font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+
+    }
+    .price-table th {
+      background: #ddd;
+    }
+    .price-table th, td {
+border: 1px solid #8c8888;
+    text-align: left;
+    padding: 8px;
+    }
+    .price-table td {
+
+    }
+
+    @media only screen and (max-width: 768px) {
+      .events-widget .wid-block {float:none;min-height:auto;}
+      .events-widget .widget-block-1 {
+        width:100%;
+      }
+      .events-widget .widget-block-2 {
+        width:100%;
+      }
+      .events-widget .widget-block-3 {
+        width:100%;
+      }
+      .events-widget .widget-block-4 {
+        width:100%;
+      }
+      .chart-block .chart-wrapper {width:100%;}
+      .price-table th {font-weight: bold;}
+      .price-table th, td {font-size:10px;}
+       .events-widget .wid-block:after {
+        content: '';
+        display: none;
+       }
+    }
   }
   
