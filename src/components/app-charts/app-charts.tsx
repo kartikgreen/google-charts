@@ -9,14 +9,14 @@ export class AppCharts {
   @Element() hostElement: HTMLElement;
   @State() selectCountry: string;
   @State() selectRegion: string;
-  categories = ['All', 'Sports', 'Entertainment', 'Business', 'Travel Alerts',
-   'Weather', 'Holidays', 'Political'];
+  categories = [{id:1, value: 'Sports'}, {id:2, value: 'Politics'}, {id:3, value: 'Bussiness'}, {id:4, value: 'EnterTainment'}];
   categoriesSelected = [];
   region = ['Europe', 'Asia', 'Africa'];
   countryList = ['USA', 'IND', 'PAK'];
-  checkedValue;
   city;
   addressOne;
+  fromDate;
+  toDate;
   addressTwo;
   zip;
   handleCityChange(event) {
@@ -40,6 +40,8 @@ export class AppCharts {
     }]
   };
   componentDidLoad() {
+    var x = this.hostElement.querySelector('#box').hasAttribute('checked');
+    console.log('x', x);
     this.createDatePicker('fromDatepicker');
     this.createDatePicker('toDatepicker');
     this.createPieChart(this.datas);
@@ -67,7 +69,14 @@ export class AppCharts {
     });
   }
   handleSubmit(e) {
-    console.log('submit', this.selectCountry, this.selectRegion);
+    console.log('Onsubmit->','city->',this.city,
+    'address one->',this.addressOne,
+    'address two->', this.addressTwo,
+    'from date->',this.fromDate,
+    'To date->',this.toDate,
+    'zip->',this.zip, 
+    'selected region->',this.selectRegion,
+    'selected country->', this.selectCountry);
     console.log('cat selected', this.categoriesSelected);
     e.preventDefault();
   }
@@ -75,85 +84,113 @@ export class AppCharts {
     console.log(event.target.value);
     this.selectRegion = event.target.value;
   }
+  handleFromDateChange(event) {
+    this.fromDate = event.target.value;
+  }
+  handleToDateChange(event) {
+    this.toDate = event.target.value;
+  }
   handleCountry(event) {
     console.log(event.target.value);
     this.selectCountry = event.target.value;
   }
-  handleCheckBox(event) {
-    const obj = {};
-    obj[event.target.value] = event.target.checked;
+  handleCategories(event) {
     if (event.target.checked) {
-      this.categoriesSelected.push(obj);
+      if (event.target.value === 'All') {
+        this.categoriesSelected = this.categories.map(m => m.id);
+        this.selectAll()
+        return;
+      }
+      this.categoriesSelected.push(event.target.value);
       return;
     }
-    const key = Object.keys(obj);
-    this.categoriesSelected = this.categoriesSelected.reduce(function(arr, item){
-    if(!(Object.keys(item).indexOf(key[0])!=-1))
-      arr.push(item);
-      return arr;
-    },[]);
+    if (event.target.value === 'All') {
+      this.unSelectAll();
+      this.categoriesSelected = [];
+    }
+    this.categoriesSelected = this.categoriesSelected.filter(r => r != event.target.value);
   }
   handlePlace(event) {
     if (event.target.value === 'region') {
-      this.removeAttribute('#region', 'disabled');
-      this.setAttribute('#country', 'disabled');
-      this.setAttribute('#city', 'disabled');
-      this.setAttribute('#zip', 'disabled');
-      this.setAttribute('#address_one', 'disabled');
-      this.setAttribute('#address_two', 'disabled');
+      this.deleteAttribute('#region', 'disabled');
+      this.addAttribute('#country', 'disabled');
+      this.addAttribute('#city', 'disabled');
+      this.addAttribute('#zip', 'disabled');
+      this.addAttribute('#address_one', 'disabled');
+      this.addAttribute('#address_two', 'disabled');
     }
     if (event.target.value === 'country') {
-      this.removeAttribute('#country', 'disabled');
-      this.setAttribute('#region', 'disabled');
-      this.setAttribute('#city', 'disabled');
-      this.setAttribute('#zip', 'disabled');
-      this.setAttribute('#address_one', 'disabled');
-      this.setAttribute('#address_two', 'disabled');
+      this.deleteAttribute('#country', 'disabled');
+      this.addAttribute('#region', 'disabled');
+      this.addAttribute('#city', 'disabled');
+      this.addAttribute('#zip', 'disabled');
+      this.addAttribute('#address_one', 'disabled');
+      this.addAttribute('#address_two', 'disabled');
     }
     if (event.target.value === 'city') {
-      this.removeAttribute('#city', 'disabled');
-      this.setAttribute('#region', 'disabled');
-      this.setAttribute('#country', 'disabled');
-      this.setAttribute('#zip', 'disabled');
-      this.setAttribute('#address_one', 'disabled');
-      this.setAttribute('#address_two', 'disabled');
+      this.deleteAttribute('#city', 'disabled');
+      this.addAttribute('#region', 'disabled');
+      this.addAttribute('#country', 'disabled');
+      this.addAttribute('#zip', 'disabled');
+      this.addAttribute('#address_one', 'disabled');
+      this.addAttribute('#address_two', 'disabled');
     }
     if (event.target.value === 'address') {
-      this.setAttribute('#city', 'disabled');
-      this.setAttribute('#region', 'disabled');
-      this.setAttribute('#country', 'disabled');
-      this.removeAttribute('#zip', 'disabled');
-      this.removeAttribute('#address_one', 'disabled');
-      this.removeAttribute('#address_two', 'disabled');
+      this.addAttribute('#city', 'disabled');
+      this.addAttribute('#region', 'disabled');
+      this.addAttribute('#country', 'disabled');
+      this.deleteAttribute('#zip', 'disabled');
+      this.deleteAttribute('#address_one', 'disabled');
+      this.deleteAttribute('#address_two', 'disabled');
     }
   }
-  removeAttribute(element, attribute) {
+  deleteAttribute(element, attribute) {
     this.hostElement.querySelector(element).removeAttribute(attribute);
   }
-  setAttribute(element, attribute) {
+  addAttribute(element, attribute) {
     this.hostElement.querySelector(element).setAttribute(attribute, '');
+  }
+  selectAll() {
+    const checkboxes: any  = this.hostElement.querySelectorAll('.categories');
+    let i = 0;
+    while(i < checkboxes.length) {
+      checkboxes[i].checked = true;
+      i++;
+    }
+  }
+  unSelectAll() {
+    const checkboxes: any = this.hostElement.querySelectorAll('.categories');
+    let i = 0;
+    while (i < checkboxes.length) {
+      checkboxes[i].checked  = false;
+      i++;
+    }
   }
   render() {
     return (
       <div>
-        <button id="myBtn">My Button</button>
+        <input value="hello" id="box" checked type="checkbox"/>
         <div class="chart-wrapper"><canvas id="pie-chart"></canvas></div>
         <form onSubmit={(e) => this.handleSubmit(e)}>
           <label>
             From Date:
-            <input type="text" id="fromDatepicker" class="flatpickr" placeholder="Select a from date" />
+            <input type="text" id="fromDatepicker" onInput={(e) => this.handleFromDateChange(e)} class="flatpickr" placeholder="Select a from date" />
           </label>
           <label>
             To Date:
-            <input type="text" id="toDatepicker" class="flatpickr" placeholder="Select a to date" />
+            <input type="text" id="toDatepicker" onInput={(e) => this.handleToDateChange(e)} class="flatpickr" placeholder="Select a to date" />
           </label>
           <h4>Show all the following categories</h4>
             <div class="checkbox-group">
+            <label>
+                All:
+              <input onChange={(e) => this.handleCategories(e)} type="checkbox" name= 'All' value='All' />
+            </label>
               {
                 this.categories.map(res => 
                   <label>
-                    {res}:
-                    <input type="checkbox" name={res} value={res} onChange={(e) => this.handleCheckBox(e)} />
+                    {res.value}:
+                    <input type="checkbox" class="categories" name={res.value} value={res.id} onChange={(e) => this.handleCategories(e)} />
                   </label>
                 )
               }
