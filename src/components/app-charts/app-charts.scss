@@ -37,17 +37,17 @@ app-charts {
     position: relative;
 
     }
-    .events-widget .wid-block:after {
-      content: '';
-    display: block;
-    background: #569ff7;
-    height: 200px;
-    width: 2px;
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    margin-top: -50px;
-    }
+    // .events-widget .wid-block:after {
+    //   content: '';
+    // display: block;
+    // background: #569ff7;
+    // height: 200px;
+    // width: 2px;
+    // position: absolute;
+    // top: 50%;
+    // right: 20px;
+    // margin-top: -50px;
+    // }
     .events-widget .wid-block:after:last-child {content:'';display: none!important;}
     .events-widget .widget-block-1{
       width: 25%;
