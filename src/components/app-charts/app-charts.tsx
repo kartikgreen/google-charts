@@ -7,12 +7,13 @@ import flatpickr from "flatpickr";
 })
 export class AppCharts {
   @Element() hostElement: HTMLElement;
-  @State() selectCountry: string;
-  @State() selectRegion: string;
+  @State() selectCountry: number;
+  @State() selectRegion: number;
+  global: boolean = false;
   categories = [{id:1, value: 'Sports'}, {id:2, value: 'Politics'}, {id:3, value: 'Bussiness'}, {id:4, value: 'EnterTainment'}];
   categoriesSelected = [];
-  region = ['Europe', 'Asia', 'Africa'];
-  countryList = ['USA', 'IND', 'PAK'];
+  region = [{id:1, value: 'Europe'}, {id:2, value: 'Asia'}, {id:3, value: 'Africa'}, {id:4, value: 'Australia'}];
+  countryList = [{id:1, value: 'INDIA'}, {id:2, value: 'PAKISTAN'}, {id:3, value: 'AFGHANISTAN'}, {id:4, value: 'KAZAKASTHAN'}];
   city;
   addressOne;
   fromDate;
@@ -40,8 +41,6 @@ export class AppCharts {
     }]
   };
   componentDidLoad() {
-    var x = this.hostElement.querySelector('#box').hasAttribute('checked');
-    console.log('x', x);
     this.createDatePicker('fromDatepicker');
     this.createDatePicker('toDatepicker');
     this.createPieChart(this.datas);
@@ -69,15 +68,25 @@ export class AppCharts {
     });
   }
   handleSubmit(e) {
-    console.log('Onsubmit->','city->',this.city,
-    'address one->',this.addressOne,
-    'address two->', this.addressTwo,
-    'from date->',this.fromDate,
-    'To date->',this.toDate,
-    'zip->',this.zip, 
-    'selected region->',this.selectRegion,
-    'selected country->', this.selectCountry);
-    console.log('cat selected', this.categoriesSelected);
+    fetch('/post', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({region: this.selectRegion, 
+                            country: this.selectCountry,
+                            fromDate: this.fromDate,
+                            toDate: this.toDate,
+                            zip: this.zip,
+                            city: this.city,
+                            addressOne: this.addressOne,
+                            addressTwo: this.addressTwo,
+                            categories: this.categoriesSelected,
+                            global: this.global
+                          })
+    }).then((res)=> res.json())
+      .then((data)=> console.log('data'));
     e.preventDefault();
   }
   handleRegion(event) {
@@ -111,37 +120,73 @@ export class AppCharts {
     this.categoriesSelected = this.categoriesSelected.filter(r => r != event.target.value);
   }
   handlePlace(event) {
+    if (event.target.value === 'global') {
+      this.global = true;
+      this.addAttribute('#region', 'disabled');
+      this.addAttribute('#country', 'disabled');
+      this.addAttribute('#city', 'disabled');
+      this.addAttribute('#zip', 'disabled');
+      this.addAttribute('#address_one', 'disabled');
+      this.addAttribute('#address_two', 'disabled');
+      this.selectCountry = -1,
+      this.city = -1,
+      this.addressOne = -1,
+      this.addressTwo = -1,
+      this.zip = -1
+      this.selectRegion = -1
+    }
     if (event.target.value === 'region') {
+      this.global = false;
       this.deleteAttribute('#region', 'disabled');
       this.addAttribute('#country', 'disabled');
       this.addAttribute('#city', 'disabled');
       this.addAttribute('#zip', 'disabled');
       this.addAttribute('#address_one', 'disabled');
       this.addAttribute('#address_two', 'disabled');
+      this.selectCountry = -1,
+      this.city = -1,
+      this.addressOne = -1,
+      this.addressTwo = -1,
+      this.zip = -1
     }
     if (event.target.value === 'country') {
+      this.global = false;
       this.deleteAttribute('#country', 'disabled');
       this.addAttribute('#region', 'disabled');
       this.addAttribute('#city', 'disabled');
       this.addAttribute('#zip', 'disabled');
       this.addAttribute('#address_one', 'disabled');
       this.addAttribute('#address_two', 'disabled');
+      this.selectRegion = -1,
+      this.city = -1,
+      this.addressOne = -1,
+      this.addressTwo = -1,
+      this.zip = -1
     }
     if (event.target.value === 'city') {
+      this.global = false;
       this.deleteAttribute('#city', 'disabled');
       this.addAttribute('#region', 'disabled');
       this.addAttribute('#country', 'disabled');
       this.addAttribute('#zip', 'disabled');
       this.addAttribute('#address_one', 'disabled');
       this.addAttribute('#address_two', 'disabled');
+      this.selectRegion = -1,
+      this.addressOne = -1,
+      this.addressTwo = -1,
+      this.zip = -1,
+      this.selectCountry = -1
     }
     if (event.target.value === 'address') {
+      this.global = false;
       this.addAttribute('#city', 'disabled');
       this.addAttribute('#region', 'disabled');
       this.addAttribute('#country', 'disabled');
       this.deleteAttribute('#zip', 'disabled');
       this.deleteAttribute('#address_one', 'disabled');
       this.deleteAttribute('#address_two', 'disabled');
+      this.selectRegion = -1,
+      this.city = -1
     }
   }
   deleteAttribute(element, attribute) {
@@ -169,16 +214,15 @@ export class AppCharts {
   render() {
     return (
       <div>
-        <input value="hello" id="box" checked type="checkbox"/>
         <div class="chart-wrapper"><canvas id="pie-chart"></canvas></div>
         <form onSubmit={(e) => this.handleSubmit(e)}>
           <label>
             From Date:
-            <input type="text" id="fromDatepicker" onInput={(e) => this.handleFromDateChange(e)} class="flatpickr" placeholder="Select a from date" />
+            <input type="text" required id="fromDatepicker" onInput={(e) => this.handleFromDateChange(e)} class="flatpickr" placeholder="Select a from date" />
           </label>
           <label>
             To Date:
-            <input type="text" id="toDatepicker" onInput={(e) => this.handleToDateChange(e)} class="flatpickr" placeholder="Select a to date" />
+            <input type="text" required id="toDatepicker" onInput={(e) => this.handleToDateChange(e)} class="flatpickr" placeholder="Select a to date" />
           </label>
           <h4>Show all the following categories</h4>
             <div class="checkbox-group">
@@ -198,6 +242,7 @@ export class AppCharts {
             <div>
               <h4>For the following categories</h4>
               <div>
+                <input type="radio" onChange={(e) => this.handlePlace(e)} name="place" value="global"/>Global<br/>
                 <input type="radio" onChange={(e) => this.handlePlace(e)} name="place" value="region"/>Region<br/>
                 <input type="radio" onChange={(e) => this.handlePlace(e)} name="place" value="country"/> Country<br/>
                 <input type="radio" onChange={(e) => this.handlePlace(e)} name="place" value="city"/> City<br/> 
@@ -208,7 +253,7 @@ export class AppCharts {
                 <select disabled id="region" value={this.selectRegion} onInput={() => this.handleRegion(event)}>
                   {
                     this.region.map( res =>
-                      <option value={res}>{res}</option>
+                      <option value={res.id}>{res.value}</option>
                     )
                   }
                 </select>
@@ -218,7 +263,7 @@ export class AppCharts {
                 <select id="country" disabled value={this.selectCountry} onInput={() => this.handleCountry(event)}>
                   {
                     this.countryList.map(res =>
-                      <option value={res}>{res}</option>
+                      <option value={res.id}>{res.value}</option>
                     )
                   }
                 </select>
