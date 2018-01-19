@@ -13,9 +13,10 @@ export class AppCharts {
   categoriesSelected = [];
   region = ['Europe', 'Asia', 'Africa'];
   countryList = ['USA', 'IND', 'PAK'];
-  checkedValue;
   city;
   addressOne;
+  fromDate;
+  toDate;
   addressTwo;
   zip;
   handleCityChange(event) {
@@ -39,6 +40,8 @@ export class AppCharts {
     }]
   };
   componentDidLoad() {
+    var x = this.hostElement.querySelector('#box').hasAttribute('checked');
+    console.log('x', x);
     this.createDatePicker('fromDatepicker');
     this.createDatePicker('toDatepicker');
     this.createPieChart(this.datas);
@@ -66,13 +69,26 @@ export class AppCharts {
     });
   }
   handleSubmit(e) {
-    console.log('submit', this.selectCountry, this.selectRegion);
+    console.log('Onsubmit->','city->',this.city,
+    'address one->',this.addressOne,
+    'address two->', this.addressTwo,
+    'from date->',this.fromDate,
+    'To date->',this.toDate,
+    'zip->',this.zip, 
+    'selected region->',this.selectRegion,
+    'selected country->', this.selectCountry);
     console.log('cat selected', this.categoriesSelected);
     e.preventDefault();
   }
   handleRegion(event) {
     console.log(event.target.value);
     this.selectRegion = event.target.value;
+  }
+  handleFromDateChange(event) {
+    this.fromDate = event.target.value;
+  }
+  handleToDateChange(event) {
+    this.toDate = event.target.value;
   }
   handleCountry(event) {
     console.log(event.target.value);
@@ -81,12 +97,16 @@ export class AppCharts {
   handleCategories(event) {
     if (event.target.checked) {
       if (event.target.value === 'All') {
-        console.log('cat val', this.categories.map(m => m.id));
+        this.categoriesSelected = this.categories.map(m => m.id);
         this.selectAll()
         return;
       }
       this.categoriesSelected.push(event.target.value);
       return;
+    }
+    if (event.target.value === 'All') {
+      this.unSelectAll();
+      this.categoriesSelected = [];
     }
     this.categoriesSelected = this.categoriesSelected.filter(r => r != event.target.value);
   }
@@ -130,33 +150,35 @@ export class AppCharts {
   addAttribute(element, attribute) {
     this.hostElement.querySelector(element).setAttribute(attribute, '');
   }
-   selectAll() {
-    const checkboxes = this.hostElement.querySelectorAll('.categories');
-    // checkboxes[0].setAttribute("checked", "checked");
-    console.log('checkboxes.length', checkboxes.length);
+  selectAll() {
+    const checkboxes: any  = this.hostElement.querySelectorAll('.categories');
     let i = 0;
-    while(i <= checkboxes.length) {
-    console.log('called');
-      checkboxes[i].setAttribute("checked", "checked");
+    while(i < checkboxes.length) {
+      checkboxes[i].checked = true;
+      i++;
     }
-	}
-  checkAllBox(element, attribute) {
-    const cb = this.hostElement.querySelectorAll(element);
-    cb[0].setAttribute(attribute, 'true');
+  }
+  unSelectAll() {
+    const checkboxes: any = this.hostElement.querySelectorAll('.categories');
+    let i = 0;
+    while (i < checkboxes.length) {
+      checkboxes[i].checked  = false;
+      i++;
+    }
   }
   render() {
     return (
       <div>
-        <button id="myBtn">My Button</button>
+        <input value="hello" id="box" checked type="checkbox"/>
         <div class="chart-wrapper"><canvas id="pie-chart"></canvas></div>
         <form onSubmit={(e) => this.handleSubmit(e)}>
           <label>
             From Date:
-            <input type="text" id="fromDatepicker" class="flatpickr" placeholder="Select a from date" />
+            <input type="text" id="fromDatepicker" onInput={(e) => this.handleFromDateChange(e)} class="flatpickr" placeholder="Select a from date" />
           </label>
           <label>
             To Date:
-            <input type="text" id="toDatepicker" class="flatpickr" placeholder="Select a to date" />
+            <input type="text" id="toDatepicker" onInput={(e) => this.handleToDateChange(e)} class="flatpickr" placeholder="Select a to date" />
           </label>
           <h4>Show all the following categories</h4>
             <div class="checkbox-group">
