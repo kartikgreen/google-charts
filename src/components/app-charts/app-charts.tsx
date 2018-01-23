@@ -168,7 +168,7 @@ export class AppCharts {
   }
   render() {
     return (
-      <div>
+      <div><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
         <input value="hello" id="box" checked type="checkbox"/>
         
@@ -188,15 +188,17 @@ export class AppCharts {
           <div class="widget-block-2 wid-block">
           <h4>Show all the following categories</h4>
             <div class="checkbox-group">
-            <label>
-                All:
-              <input onChange={(e) => this.handleCategories(e)} type="checkbox" name= 'All' value='All' />
+            <label class="label">
+                <span class="cat-label">All:</span>
+              <input onChange={(e) => this.handleCategories(e)} type="checkbox" class="option-input checkbox" name= 'All' value='All' />
+              
             </label>
               {
                 this.categories.map(res => 
-                  <label>
-                    {res.value}:
-                    <input type="checkbox" class="categories" name={res.value} value={res.id} onChange={(e) => this.handleCategories(e)} />
+                  <label class="label">
+                    <span class="cat-label">{res.value}:</span>
+                    <input type="checkbox"  class="categories option-input checkbox" name={res.value} value={res.id} onChange={(e) => this.handleCategories(e)} />
+                   
                   </label>
                 )
               }
@@ -207,7 +209,7 @@ export class AppCharts {
               <div class="radio-group">
               <label>
                 <span class="label-text">
-                <input type="radio" onChange={(e) => this.handlePlace(e)} name="place" value="region"/>Region 
+                <input type="radio" class="option-input radio" onChange={(e) => this.handlePlace(e)} name="place" value="region"/>Region 
                 </span>
                 <select disabled id="region" value={this.selectRegion} onInput={() => this.handleRegion(event)}>
                   {
@@ -219,7 +221,7 @@ export class AppCharts {
               </label>
               <label>
                 <span class="label-text">
-                <input type="radio" onChange={(e) => this.handlePlace(e)} name="place" value="country"/> Country
+                <input type="radio" class="option-input radio" onChange={(e) => this.handlePlace(e)} name="place" value="country"/> Country
                 </span>
                 <select id="country" disabled value={this.selectCountry} onInput={() => this.handleCountry(event)}>
                   {
@@ -231,13 +233,13 @@ export class AppCharts {
               </label>
               <label>
                 <span class="label-text">
-                <input type="radio" onChange={(e) => this.handlePlace(e)} name="place" value="city"/> City
+                <input type="radio" class="option-input radio" onChange={(e) => this.handlePlace(e)} name="place" value="city"/> City
                 </span>
                 <input type="text" id="city" disabled value={this.city} onInput={(e) => this.handleCityChange(e)} />
               </label>
               <label>
                 <span class="label-text">
-                 <input type="radio" onChange={(e) => this.handlePlace(e)} name="place" value="address"/> Use Address
+                 <input type="radio" class="option-input radio" onChange={(e) => this.handlePlace(e)} name="place" value="address"/> Use Address
                 </span>
                 <input placeholder="Address 1" type="text" id="address_one"  disabled value={this.addressOne} onInput={(e) => this.handleAddressOneChange(e)} />
               </label>
@@ -255,11 +257,12 @@ export class AppCharts {
               </label>
             </div>
             </div>
-            <div class="widget-block-4 wid-block">
-              <h4> .</h4>
-              <input type="submit" value="Submit" />
-            </div>
             <div class="clearfix"></div>
+            <div class="widget-block-4">
+              
+              <input type="submit" class="go-btn" value="Go" />
+            </div>
+            
           
         </form>
         </div>
