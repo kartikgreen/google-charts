@@ -53,25 +53,25 @@ export class AppChartsEventForm {
     });
   }
   handleSubmit(e) {
-    // fetch('/post', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Accept': 'application/json, text/plain, */*',
-    //     'Content-type': 'application/json'
-    //   },
-    //   body: JSON.stringify({region: this.selectRegion, 
-    //                         country: this.selectCountry,
-    //                         fromDate: this.fromDate,
-    //                         toDate: this.toDate,
-    //                         zip: this.zip,
-    //                         city: this.city,
-    //                         addressOne: this.addressOne,
-    //                         addressTwo: this.addressTwo,
-    //                         categories: this.categoriesSelected,
-    //                         global: this.global
-    //                       })
-    // }).then((res)=> res.json())
-    //   .then((data)=> console.log('data'));
+    fetch('/post', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({region: this.selectRegion, 
+                            country: this.selectCountry,
+                            fromDate: this.fromDate,
+                            toDate: this.toDate,
+                            zip: this.zip,
+                            city: this.city,
+                            addressOne: this.addressOne,
+                            addressTwo: this.addressTwo,
+                            categories: this.categoriesSelected,
+                            global: this.global
+                          })
+    }).then((res)=> res.json())
+      .then((data)=> console.log('data'));
       this.onSubmit.emit({ answer: true });  
     e.preventDefault();
   }
@@ -199,80 +199,147 @@ export class AppChartsEventForm {
   }
   render() {
     return (
-      <div>
+       <div><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+        
+         <div class="events-widget">
         <form onSubmit={(e) => this.handleSubmit(e)}>
+          <div class="widget-block-1 wid-block">
+           <h4>Run an Event Count</h4>
           <label>
-            From Date:
-            <input type="text" required id="fromDatepicker" onInput={(e) => this.handleFromDateChange(e)} class="flatpickr" placeholder="Select a from date" />
+            <span class="text-label">Between </span>
+            <input type="text" id="fromDatepicker" onInput={(e) => this.handleFromDateChange(e)} class="flatpickr" placeholder="Select a from date" />
           </label>
           <label>
-            To Date:
-            <input type="text" required id="toDatepicker" onInput={(e) => this.handleToDateChange(e)} class="flatpickr" placeholder="Select a to date" />
+            <span class="text-label">and</span>
+            <input type="text" id="toDatepicker" onInput={(e) => this.handleToDateChange(e)} class="flatpickr" placeholder="Select a to date" />
           </label>
+          </div>
+          <div class="widget-block-2 wid-block">
           <h4>Show all the following categories</h4>
             <div class="checkbox-group">
-            <label>
-                All:
-              <input onChange={(e) => this.handleCategories(e)} type="checkbox" name= 'All' value='All' />
+            <label class="label">
+                <span class="cat-label">All:</span>
+              <input onChange={(e) => this.handleCategories(e)} type="checkbox" class="option-input checkbox" name= 'All' value='All' />
+              
             </label>
               {
                 this.categories.map(res => 
-                  <label>
-                    {res.value}:
-                    <input type="checkbox" class="categories" name={res.value} value={res.id} onChange={(e) => this.handleCategories(e)} />
+                  <label class="label">
+                    <span class="cat-label">{res.value}:</span>
+                    <input type="checkbox"  class="categories option-input checkbox" name={res.value} value={res.id} onChange={(e) => this.handleCategories(e)} />
+                   
                   </label>
                 )
               }
             </div>
-            <div>
+            </div>
+            <div class="widget-block-3 wid-block">
               <h4>For the following categories</h4>
-              <div>
-                <input type="radio" onChange={(e) => this.handlePlace(e)} name="place" value="global"/>Global<br/>
-                <input type="radio" onChange={(e) => this.handlePlace(e)} name="place" value="region"/>Region<br/>
-                <input type="radio" onChange={(e) => this.handlePlace(e)} name="place" value="country"/> Country<br/>
-                <input type="radio" onChange={(e) => this.handlePlace(e)} name="place" value="city"/> City<br/> 
-                <input type="radio" onChange={(e) => this.handlePlace(e)} name="place" value="address"/> Use Address<br/> 
-              </div>
+              <div class="radio-group">
+                <label>
+                  <span class="label-text">
+                <input type="radio" onChange={(e) => this.handlePlace(e)} name="place" value="global"/>Global
+                </span>
+
+                </label>
               <label>
-                Region:
+                <span class="label-text">
+                <input type="radio" class="option-input radio" onChange={(e) => this.handlePlace(e)} name="place" value="region"/>Region 
+                </span>
                 <select disabled id="region" value={this.selectRegion} onInput={() => this.handleRegion(event)}>
-                  {
-                    this.region.map( res =>
-                      <option value={res.id}>{res.value}</option>
-                    )
-                  }
+                {
+                this.region.map( res =>
+                <option value={res.id}>{res.value}</option>
+                )
+                }
                 </select>
               </label>
               <label>
-                Country:
-                <select id="country" disabled value={this.selectCountry} onInput={() => this.handleCountry(event)}>
-                  {
-                    this.countryList.map(res =>
-                      <option value={res.id}>{res.value}</option>
-                    )
-                  }
+                <span class="label-text">
+                <input type="radio" class="option-input radio" onChange={(e) => this.handlePlace(e)} name="place" value="country"/> Country
+                </span>
+               <select id="country" disabled value={this.selectCountry} onInput={() => this.handleCountry(event)}>
+                {
+                this.countryList.map(res =>
+                <option value={res.id}>{res.value}</option>
+                )
+                }
                 </select>
               </label>
               <label>
-                City:
+                <span class="label-text">
+                <input type="radio" class="option-input radio" onChange={(e) => this.handlePlace(e)} name="place" value="city"/> City
+                </span>
                 <input type="text" id="city" disabled value={this.city} onInput={(e) => this.handleCityChange(e)} />
               </label>
               <label>
-                 Address1:
-                <input type="text" id="address_one" disabled value={this.addressOne} onInput={(e) => this.handleAddressOneChange(e)} />
+                <span class="label-text">
+                 <input type="radio" class="option-input radio" onChange={(e) => this.handlePlace(e)} name="place" value="address"/> Use Address
+                </span>
+                <input placeholder="Address 1" type="text" id="address_one"  disabled value={this.addressOne} onInput={(e) => this.handleAddressOneChange(e)} />
               </label>
               <label>
-                 Address2:
-                <input type="text" id="address_two" disabled value={this.addressTwo} onInput={(e) => this.handleAddressTwoChange(e)} />
+                <span class="label-text">
+                 
+                 </span>
+                <input  placeholder="Address 2" type="text" id="address_two" disabled value={this.addressTwo} onInput={(e) => this.handleAddressTwoChange(e)} />
               </label>
               <label>
-                 Zip:
-                <input type="text" id="zip" disabled value={this.zip} onInput={(e) => this.handleZipChange(e)} />
+                <span class="label-text">
+                 
+                 </span>
+                <input  placeholder="Zip" type="text" id="zip" disabled value={this.zip} onInput={(e) => this.handleZipChange(e)} />
               </label>
             </div>
-          <input type="submit" value="Submit" />
+            </div>
+            <div class="clearfix"></div>
+            <div class="widget-block-4">
+              
+              <input type="submit" class="go-btn" value="Go" />
+            </div>
+            
+          
         </form>
-        <pre>{this.categoriesSelected}</pre>
+        </div>
+        <div class="chart-block">
+          <div class="chart-wrapper"><canvas id="pie-chart"></canvas></div>
+          <div class="chart-wrapper"><canvas id="pie-chart1"></canvas></div>
+          <div class="chart-wrapper"><canvas id="pie-chart2"></canvas></div>
+          <div class="clearfix"></div>
+          <h3>Plans</h3>
+          <table class="price-table">
+            <tr>
+              <th>Plan Type</th>
+              <th>Description</th>
+              <th>Cost</th>
+              <th></th>
+            </tr>
+            <tr>
+              <td>Plan Type 1</td>
+              <td>Description of plan type</td>
+              <td>$149.00</td>
+              <td><a href="">Add to cart</a></td>
+            </tr>
+            <tr>
+              <td>Plan Type 2</td>
+              <td>Description of plan type</td>
+              <td>$249.00</td>
+              <td><a href="">Add to cart</a></td>
+            </tr>
+            <tr>
+              <td>Plan Type 3</td>
+              <td>Description of plan type</td>
+              <td>$349.00</td>
+              <td><a href="">Add to cart</a></td>
+            </tr>
+            <tr>
+              <td>Plan Type 4</td>
+              <td>Description of plan type</td>
+              <td>$749.00</td>
+              <td><a href="">Add to cart</a></td>
+            </tr>
+          </table>
+        </div>
       </div>
     );
   }

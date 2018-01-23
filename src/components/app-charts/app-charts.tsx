@@ -74,6 +74,7 @@ export class AppCharts {
         <div style={{ display: this.showCharts ? 'block' : 'none' }} class="chart-wrapper"><canvas id="pie-chart3"></canvas></div>
         <app-charts-events-form></app-charts-events-form>
       </div>
+      
     );
   }
 }
