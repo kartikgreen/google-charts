@@ -1,14 +1,16 @@
-import { Component, Prop, State, Element  } from '@stencil/core';
+import { Component, Prop, State, Element, Listen  } from '@stencil/core';
 import Chart from 'chart.js';
-import flatpickr from "flatpickr";
+
 @Component({
   tag: 'app-charts',
   styleUrl: 'app-charts.scss'
 })
+
 export class AppCharts {
   @Element() hostElement: HTMLElement;
   @State() selectCountry: number;
   @State() selectRegion: number;
+  @State() showCharts: boolean = false;
   global: boolean = false;
   categories = [{id:1, value: 'Sports'}, {id:2, value: 'Politics'}, {id:3, value: 'Bussiness'}, {id:4, value: 'EnterTainment'}];
   categoriesSelected = [];
@@ -20,6 +22,11 @@ export class AppCharts {
   toDate;
   addressTwo;
   zip;
+  @Listen('onSubmit')
+  log(event) {
+    console.log('form is submitted', event.detail);
+    this.showCharts = true;
+  }
   handleCityChange(event) {
     this.city = event.target.value;
   }
@@ -41,20 +48,12 @@ export class AppCharts {
     }]
   };
   componentDidLoad() {
-    this.createDatePicker('fromDatepicker');
-    this.createDatePicker('toDatepicker');
-    this.createPieChart(this.datas);
-    fetch('https://jsonplaceholder.typicode.com/posts').then((res) => res.json())
-      .then((data) => {console.log(data)});
+    this.createPieChart(this.datas, 'pie-chart1');
+    this.createPieChart(this.datas, 'pie-chart2');
+    this.createPieChart(this.datas, 'pie-chart3');
   }
-  createDatePicker(element) {
-    flatpickr(document.getElementById(element), {
-      enableTime: false,
-      dateFormat: "Y-m-d",
-    });
-  }
-  createPieChart(datas) {
-      new Chart(document.getElementById("pie-chart"), {
+  createPieChart(datas, elementId) {
+      new Chart(document.getElementById(elementId), {
         type: 'pie',
         data: datas,
         options: {
@@ -67,227 +66,13 @@ export class AppCharts {
         }
     });
   }
-  handleSubmit(e) {
-    fetch('/post', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify({region: this.selectRegion, 
-                            country: this.selectCountry,
-                            fromDate: this.fromDate,
-                            toDate: this.toDate,
-                            zip: this.zip,
-                            city: this.city,
-                            addressOne: this.addressOne,
-                            addressTwo: this.addressTwo,
-                            categories: this.categoriesSelected,
-                            global: this.global
-                          })
-    }).then((res)=> res.json())
-      .then((data)=> console.log('data'));
-    e.preventDefault();
-  }
-  handleRegion(event) {
-    console.log(event.target.value);
-    this.selectRegion = event.target.value;
-  }
-  handleFromDateChange(event) {
-    this.fromDate = event.target.value;
-  }
-  handleToDateChange(event) {
-    this.toDate = event.target.value;
-  }
-  handleCountry(event) {
-    console.log(event.target.value);
-    this.selectCountry = event.target.value;
-  }
-  handleCategories(event) {
-    if (event.target.checked) {
-      if (event.target.value === 'All') {
-        this.categoriesSelected = this.categories.map(m => m.id);
-        this.selectAll()
-        return;
-      }
-      this.categoriesSelected.push(event.target.value);
-      return;
-    }
-    if (event.target.value === 'All') {
-      this.unSelectAll();
-      this.categoriesSelected = [];
-    }
-    this.categoriesSelected = this.categoriesSelected.filter(r => r != event.target.value);
-  }
-  handlePlace(event) {
-    if (event.target.value === 'global') {
-      this.global = true;
-      this.addAttribute('#region', 'disabled');
-      this.addAttribute('#country', 'disabled');
-      this.addAttribute('#city', 'disabled');
-      this.addAttribute('#zip', 'disabled');
-      this.addAttribute('#address_one', 'disabled');
-      this.addAttribute('#address_two', 'disabled');
-      this.selectCountry = -1,
-      this.city = -1,
-      this.addressOne = -1,
-      this.addressTwo = -1,
-      this.zip = -1
-      this.selectRegion = -1
-    }
-    if (event.target.value === 'region') {
-      this.global = false;
-      this.deleteAttribute('#region', 'disabled');
-      this.addAttribute('#country', 'disabled');
-      this.addAttribute('#city', 'disabled');
-      this.addAttribute('#zip', 'disabled');
-      this.addAttribute('#address_one', 'disabled');
-      this.addAttribute('#address_two', 'disabled');
-      this.selectCountry = -1,
-      this.city = -1,
-      this.addressOne = -1,
-      this.addressTwo = -1,
-      this.zip = -1
-    }
-    if (event.target.value === 'country') {
-      this.global = false;
-      this.deleteAttribute('#country', 'disabled');
-      this.addAttribute('#region', 'disabled');
-      this.addAttribute('#city', 'disabled');
-      this.addAttribute('#zip', 'disabled');
-      this.addAttribute('#address_one', 'disabled');
-      this.addAttribute('#address_two', 'disabled');
-      this.selectRegion = -1,
-      this.city = -1,
-      this.addressOne = -1,
-      this.addressTwo = -1,
-      this.zip = -1
-    }
-    if (event.target.value === 'city') {
-      this.global = false;
-      this.deleteAttribute('#city', 'disabled');
-      this.addAttribute('#region', 'disabled');
-      this.addAttribute('#country', 'disabled');
-      this.addAttribute('#zip', 'disabled');
-      this.addAttribute('#address_one', 'disabled');
-      this.addAttribute('#address_two', 'disabled');
-      this.selectRegion = -1,
-      this.addressOne = -1,
-      this.addressTwo = -1,
-      this.zip = -1,
-      this.selectCountry = -1
-    }
-    if (event.target.value === 'address') {
-      this.global = false;
-      this.addAttribute('#city', 'disabled');
-      this.addAttribute('#region', 'disabled');
-      this.addAttribute('#country', 'disabled');
-      this.deleteAttribute('#zip', 'disabled');
-      this.deleteAttribute('#address_one', 'disabled');
-      this.deleteAttribute('#address_two', 'disabled');
-      this.selectRegion = -1,
-      this.city = -1
-    }
-  }
-  deleteAttribute(element, attribute) {
-    this.hostElement.querySelector(element).removeAttribute(attribute);
-  }
-  addAttribute(element, attribute) {
-    this.hostElement.querySelector(element).setAttribute(attribute, '');
-  }
-  selectAll() {
-    const checkboxes: any  = this.hostElement.querySelectorAll('.categories');
-    let i = 0;
-    while(i < checkboxes.length) {
-      checkboxes[i].checked = true;
-      i++;
-    }
-  }
-  unSelectAll() {
-    const checkboxes: any = this.hostElement.querySelectorAll('.categories');
-    let i = 0;
-    while (i < checkboxes.length) {
-      checkboxes[i].checked  = false;
-      i++;
-    }
-  }
   render() {
     return (
       <div>
-        <div class="chart-wrapper"><canvas id="pie-chart"></canvas></div>
-        <form onSubmit={(e) => this.handleSubmit(e)}>
-          <label>
-            From Date:
-            <input type="text" required id="fromDatepicker" onInput={(e) => this.handleFromDateChange(e)} class="flatpickr" placeholder="Select a from date" />
-          </label>
-          <label>
-            To Date:
-            <input type="text" required id="toDatepicker" onInput={(e) => this.handleToDateChange(e)} class="flatpickr" placeholder="Select a to date" />
-          </label>
-          <h4>Show all the following categories</h4>
-            <div class="checkbox-group">
-            <label>
-                All:
-              <input onChange={(e) => this.handleCategories(e)} type="checkbox" name= 'All' value='All' />
-            </label>
-              {
-                this.categories.map(res => 
-                  <label>
-                    {res.value}:
-                    <input type="checkbox" class="categories" name={res.value} value={res.id} onChange={(e) => this.handleCategories(e)} />
-                  </label>
-                )
-              }
-            </div>
-            <div>
-              <h4>For the following categories</h4>
-              <div>
-                <input type="radio" onChange={(e) => this.handlePlace(e)} name="place" value="global"/>Global<br/>
-                <input type="radio" onChange={(e) => this.handlePlace(e)} name="place" value="region"/>Region<br/>
-                <input type="radio" onChange={(e) => this.handlePlace(e)} name="place" value="country"/> Country<br/>
-                <input type="radio" onChange={(e) => this.handlePlace(e)} name="place" value="city"/> City<br/> 
-                <input type="radio" onChange={(e) => this.handlePlace(e)} name="place" value="address"/> Use Address<br/> 
-              </div>
-              <label>
-                Region:
-                <select disabled id="region" value={this.selectRegion} onInput={() => this.handleRegion(event)}>
-                  {
-                    this.region.map( res =>
-                      <option value={res.id}>{res.value}</option>
-                    )
-                  }
-                </select>
-              </label>
-              <label>
-                Country:
-                <select id="country" disabled value={this.selectCountry} onInput={() => this.handleCountry(event)}>
-                  {
-                    this.countryList.map(res =>
-                      <option value={res.id}>{res.value}</option>
-                    )
-                  }
-                </select>
-              </label>
-              <label>
-                City:
-                <input type="text" id="city" disabled value={this.city} onInput={(e) => this.handleCityChange(e)} />
-              </label>
-              <label>
-                 Address1:
-                <input type="text" id="address_one" disabled value={this.addressOne} onInput={(e) => this.handleAddressOneChange(e)} />
-              </label>
-              <label>
-                 Address2:
-                <input type="text" id="address_two" disabled value={this.addressTwo} onInput={(e) => this.handleAddressTwoChange(e)} />
-              </label>
-              <label>
-                 Zip:
-                <input type="text" id="zip" disabled value={this.zip} onInput={(e) => this.handleZipChange(e)} />
-              </label>
-            </div>
-          <input type="submit" value="Submit" />
-        </form>
-        <pre>{this.categoriesSelected}</pre>
+        <div style={{ display: this.showCharts ? 'block' : 'none' }} class="chart-wrapper"><canvas id="pie-chart1"></canvas></div>
+        <div style={{ display: this.showCharts ? 'block' : 'none' }} class="chart-wrapper"><canvas id="pie-chart2"></canvas></div>
+        <div style={{ display: this.showCharts ? 'block' : 'none' }} class="chart-wrapper"><canvas id="pie-chart3"></canvas></div>
+        <app-charts-events-form></app-charts-events-form>
       </div>
     );
   }
