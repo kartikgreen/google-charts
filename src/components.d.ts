@@ -8,29 +8,29 @@ import '@stencil/router';
 
 
 import {
-  AppChartsEventForm as AppChartsEventsForm
-} from './components/app-charts-event-form/app-charts-event-form';
+  AppCharts as AppCharts
+} from './components/app-charts/app-charts';
 
 declare global {
-  interface HTMLAppChartsEventsFormElement extends AppChartsEventsForm, HTMLElement {
+  interface HTMLAppChartsElement extends AppCharts, HTMLElement {
   }
-  var HTMLAppChartsEventsFormElement: {
-    prototype: HTMLAppChartsEventsFormElement;
-    new (): HTMLAppChartsEventsFormElement;
+  var HTMLAppChartsElement: {
+    prototype: HTMLAppChartsElement;
+    new (): HTMLAppChartsElement;
   };
   interface HTMLElementTagNameMap {
-    "app-charts-events-form": HTMLAppChartsEventsFormElement;
+    "app-charts": HTMLAppChartsElement;
   }
   interface ElementTagNameMap {
-    "app-charts-events-form": HTMLAppChartsEventsFormElement;
+    "app-charts": HTMLAppChartsElement;
   }
   namespace JSX {
     interface IntrinsicElements {
-      "app-charts-events-form": JSXElements.AppChartsEventsFormAttributes;
+      "app-charts": JSXElements.AppChartsAttributes;
     }
   }
   namespace JSXElements {
-    export interface AppChartsEventsFormAttributes extends HTMLAttributes {
+    export interface AppChartsAttributes extends HTMLAttributes {
       datas?: any;
     }
   }

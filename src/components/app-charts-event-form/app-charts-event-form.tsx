@@ -294,51 +294,9 @@ export class AppChartsEventForm {
             </div>
             <div class="clearfix"></div>
             <div class="widget-block-4">
-              
               <input type="submit" class="go-btn" value="Go" />
             </div>
-            
-          
         </form>
-        </div>
-        <div class="chart-block">
-          <div class="chart-wrapper"><canvas id="pie-chart"></canvas></div>
-          <div class="chart-wrapper"><canvas id="pie-chart1"></canvas></div>
-          <div class="chart-wrapper"><canvas id="pie-chart2"></canvas></div>
-          <div class="clearfix"></div>
-          <h3>Plans</h3>
-          <table class="price-table">
-            <tr>
-              <th>Plan Type</th>
-              <th>Description</th>
-              <th>Cost</th>
-              <th></th>
-            </tr>
-            <tr>
-              <td>Plan Type 1</td>
-              <td>Description of plan type</td>
-              <td>$149.00</td>
-              <td><a href="">Add to cart</a></td>
-            </tr>
-            <tr>
-              <td>Plan Type 2</td>
-              <td>Description of plan type</td>
-              <td>$249.00</td>
-              <td><a href="">Add to cart</a></td>
-            </tr>
-            <tr>
-              <td>Plan Type 3</td>
-              <td>Description of plan type</td>
-              <td>$349.00</td>
-              <td><a href="">Add to cart</a></td>
-            </tr>
-            <tr>
-              <td>Plan Type 4</td>
-              <td>Description of plan type</td>
-              <td>$749.00</td>
-              <td><a href="">Add to cart</a></td>
-            </tr>
-          </table>
         </div>
       </div>
     );

@@ -73,6 +73,41 @@ export class AppCharts {
         <div style={{ display: this.showCharts ? 'block' : 'none' }} class="chart-wrapper"><canvas id="pie-chart2"></canvas></div>
         <div style={{ display: this.showCharts ? 'block' : 'none' }} class="chart-wrapper"><canvas id="pie-chart3"></canvas></div>
         <app-charts-events-form></app-charts-events-form>
+        <div class="chart-block">
+          <h3>Plans</h3>
+          <table class="price-table">
+            <tr>
+              <th>Plan Type</th>
+              <th>Description</th>
+              <th>Cost</th>
+              <th></th>
+            </tr>
+            <tr>
+              <td>Plan Type 1</td>
+              <td>Description of plan type</td>
+              <td>$149.00</td>
+              <td><a href="">Add to cart</a></td>
+            </tr>
+            <tr>
+              <td>Plan Type 2</td>
+              <td>Description of plan type</td>
+              <td>$249.00</td>
+              <td><a href="">Add to cart</a></td>
+            </tr>
+            <tr>
+              <td>Plan Type 3</td>
+              <td>Description of plan type</td>
+              <td>$349.00</td>
+              <td><a href="">Add to cart</a></td>
+            </tr>
+            <tr>
+              <td>Plan Type 4</td>
+              <td>Description of plan type</td>
+              <td>$749.00</td>
+              <td><a href="">Add to cart</a></td>
+            </tr>
+          </table>
+        </div>
       </div>
       
     );
