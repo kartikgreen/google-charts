@@ -199,11 +199,10 @@ export class AppChartsEventForm {
   }
   render() {
     return (
-       <div><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-        
+       <div>
          <div class="events-widget">
         <form onSubmit={(e) => this.handleSubmit(e)}>
-          <div class="widget-block-1 wid-block">
+          <div class="widget-block-1">
            <h4>Run an Event Count</h4>
           <label>
             <span class="text-label">Between </span>
@@ -217,31 +216,38 @@ export class AppChartsEventForm {
           <div class="widget-block-2 wid-block">
           <h4>Show all the following categories</h4>
             <div class="checkbox-group">
-            <label class="label">
-                <span class="cat-label">All:</span>
+            <div class="col-block"><label class="label">
+                
               <input onChange={(e) => this.handleCategories(e)} type="checkbox" class="option-input checkbox" name= 'All' value='All' />
-              
+              <span class="cat-label">All</span>
             </label>
+            </div>
               {
                 this.categories.map(res => 
+                <div class="col-block">
                   <label class="label">
-                    <span class="cat-label">{res.value}:</span>
+                    
                     <input type="checkbox"  class="categories option-input checkbox" name={res.value} value={res.id} onChange={(e) => this.handleCategories(e)} />
-                   
+                   <span class="cat-label">{res.value}</span>
                   </label>
+                  </div>
                 )
               }
+              
             </div>
             </div>
             <div class="widget-block-3 wid-block">
               <h4>For the following categories</h4>
               <div class="radio-group">
+                <div class="col-block">
                 <label>
                   <span class="label-text">
-                <input type="radio" onChange={(e) => this.handlePlace(e)} name="place" value="global"/>Global
+                <input type="radio" class="option-input radio" onChange={(e) => this.handlePlace(e)} name="place" value="global"/>Global
                 </span>
 
                 </label>
+                </div>
+                <div class="col-block">
               <label>
                 <span class="label-text">
                 <input type="radio" class="option-input radio" onChange={(e) => this.handlePlace(e)} name="place" value="region"/>Region 
@@ -254,9 +260,11 @@ export class AppChartsEventForm {
                 }
                 </select>
               </label>
+              </div>
+              <div class="col-block">
               <label>
                 <span class="label-text">
-                <input type="radio" class="option-input radio" onChange={(e) => this.handlePlace(e)} name="place" value="country"/> Country
+                <input type="radio" class="option-input radio" onChange={(e) => this.handlePlace(e)} name="place" value="country"/>Country
                 </span>
                <select id="country" disabled value={this.selectCountry} onInput={() => this.handleCountry(event)}>
                 {
@@ -266,15 +274,19 @@ export class AppChartsEventForm {
                 }
                 </select>
               </label>
+              </div>
+              <div class="col-block">
               <label>
                 <span class="label-text">
-                <input type="radio" class="option-input radio" onChange={(e) => this.handlePlace(e)} name="place" value="city"/> City
+                <input type="radio" class="option-input radio" onChange={(e) => this.handlePlace(e)} name="place" value="city"/>City
                 </span>
                 <input type="text" id="city" disabled value={this.city} onInput={(e) => this.handleCityChange(e)} />
               </label>
+              </div>
+              <div class="col-block">
               <label>
                 <span class="label-text">
-                 <input type="radio" class="option-input radio" onChange={(e) => this.handlePlace(e)} name="place" value="address"/> Use Address
+                 <input type="radio" class="option-input radio" onChange={(e) => this.handlePlace(e)} name="place" value="address"/>Use Address
                 </span>
                 <input placeholder="Address 1" type="text" id="address_one"  disabled value={this.addressOne} onInput={(e) => this.handleAddressOneChange(e)} />
               </label>
@@ -290,6 +302,7 @@ export class AppChartsEventForm {
                  </span>
                 <input  placeholder="Zip" type="text" id="zip" disabled value={this.zip} onInput={(e) => this.handleZipChange(e)} />
               </label>
+            </div>
             </div>
             </div>
             <div class="clearfix"></div>

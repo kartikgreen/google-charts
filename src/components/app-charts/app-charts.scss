@@ -18,6 +18,7 @@ app-charts {
       transition: all .15s ease;
       cursor: pointer;
     }
+    .go-btn:focus {    outline: 0px;}
     
     button:hover {
       box-shadow: 0 3px 6px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.1);
@@ -25,15 +26,16 @@ app-charts {
     }
     .events-widget {
       display: block;
-      border: 2px solid #569ff7;
-    border-radius: 25px;
+      border: 1px solid #569ff7;
+      padding: 0px 15px 15px;
+    
 
     }
     .events-widget .wid-block{
       float: left;
     display: block;
     padding: 0px;
-    min-height: 200px;
+    
     position: relative;
 
     }
@@ -50,51 +52,61 @@ app-charts {
     // }
     .events-widget .wid-block:after:last-child {content:'';display: none!important;}
     .events-widget .widget-block-1{
-      width: 25%;
+      width: 100%;
+      padding:0px;
+      
 
     }
     .events-widget .widget-block-1 label {    margin-bottom: 10px;font-size: 12px;}
-    .events-widget .widget-block-1 input {display: inline-block;font-size: 12px;}
+    .events-widget .widget-block-1 input {display: inline-block;font-size: 12px;margin-right:40px;}
     .events-widget .widget-block-1 label .text-label  {
-      width: 100px;
+      
     display: inline-block;
     font-size: 12px;
+    margin-right:5px;
 
     }
     .events-widget .widget-block-2{
-          width: 28%;
+          width: 48%;
     padding-right: 2%;
 
     }
     .events-widget .widget-block-2 .checkbox-group {
       display: block;
           padding: 0px;
+              margin-top: -10px;
       
     }
     .events-widget .widget-block-2 .checkbox-group label {
         
         font-size: 12px;
+        display: inline;
+        cursor: pointer;
      }
      .events-widget .widget-block-2 .checkbox-group label .cat-label {
-      width:80%;
-      display: inline-block;
+      
+
+      display: inline;
      }
      .events-widget .widget-block-2 .checkbox-group input{
           
           font-size: 12px;
-          margin-right: 0px;
+          margin-left: 0px;
+          
      }
     .events-widget .widget-block-3{
-      width: 43%;
+      width: 48%;
       padding-right: 2%;
 
     }
     .events-widget .widget-block-3 .radio-group {
       display: block;
       padding: 0px;
+          margin-top: -10px;
     }
     .events-widget .widget-block-3 .radio-group  label{
-      display: block;
+      display: inline;
+      cursor: pointer;
       margin-bottom: 5px;
       font-size: 12px;
     }
@@ -178,13 +190,18 @@ app-charts {
       display: inline-block;
       font-size: 12px;
       margin-bottom: 3px;
+      margin-left: 0px;
+      
     }
+     .events-widget .widget-block-3 .radio-group  label input[type="text"]{
+    padding-left: 3px;
+     }
     .events-widget .widget-block-3 .radio-group  label select{
       display: inline-block;
     font-size: 12px;
-    width: 130px;
-    line-height: 24px;
-    height: 24px;
+    width: 134px;
+    line-height: 21px;
+    height: 21px;
     }
     .go-btn {
           border-radius: 50%;
@@ -195,6 +212,7 @@ app-charts {
     color: #fff;
     text-transform: uppercase;
     font-weight: bold; 
+    cursor: pointer;
     }
     .events-widget .widget-block-3 .radio-group  label .label-text {
       display: inline-block;
@@ -210,10 +228,20 @@ app-charts {
 
     .events-widget h4{
       display: block;
-      margin: 10px 0px 5px;
+          margin: 25px 0px 15px;
       font-size:12px;
-    
+    position: relative;
 
+    }
+    .events-widget h4:after {
+      content: '';
+      display: block;
+      height: 1px;
+      width: 80px;
+      background: #569ff7;
+      position: absolute;
+      bottom: -5px;
+      left: 0px;
     }
     .clearfix {clear:both;padding:0px;}
     .chart-block {
@@ -248,9 +276,12 @@ app-charts {
     .price-table td {
 
     }
+    .col-block {display: block;padding:0px;}
     h3 {font-size: 14px;margin-bottom: 0px;}
 
     @media only screen and (max-width: 768px) {
+      .events-widget .widget-block-1 label {display: block;margin-bottom:10px; }
+      .events-widget .widget-block-1 label .text-label {width:110px;}
       .events-widget .wid-block {float:none;min-height:auto;}
       .events-widget .widget-block-1 {
         width:100%;

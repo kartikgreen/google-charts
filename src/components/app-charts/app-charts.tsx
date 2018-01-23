@@ -73,6 +73,7 @@ export class AppCharts {
         <div style={{ display: this.showCharts ? 'block' : 'none' }} class="chart-wrapper"><canvas id="pie-chart2"></canvas></div>
         <div style={{ display: this.showCharts ? 'block' : 'none' }} class="chart-wrapper"><canvas id="pie-chart3"></canvas></div>
         <app-charts-events-form></app-charts-events-form>
+        <div>
         <div class="chart-block">
           <h3>Plans</h3>
           <table class="price-table">
@@ -109,7 +110,7 @@ export class AppCharts {
           </table>
         </div>
       </div>
-      
+      </div>
     );
   }
 }
