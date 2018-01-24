@@ -36,3 +36,33 @@ declare global {
   }
 }
 
+
+import {
+  AppCharts as AppCharts
+} from './components/app-charts/app-charts';
+
+declare global {
+  interface HTMLAppChartsElement extends AppCharts, HTMLElement {
+  }
+  var HTMLAppChartsElement: {
+    prototype: HTMLAppChartsElement;
+    new (): HTMLAppChartsElement;
+  };
+  interface HTMLElementTagNameMap {
+    "app-charts": HTMLAppChartsElement;
+  }
+  interface ElementTagNameMap {
+    "app-charts": HTMLAppChartsElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      "app-charts": JSXElements.AppChartsAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface AppChartsAttributes extends HTMLAttributes {
+      datas?: any;
+    }
+  }
+}
+

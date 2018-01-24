@@ -3,7 +3,7 @@ app-charts {
       padding: 10px;
     }
     button {
-      background: #5851ff;
+      background: #cb1f3d;
       color: white;
       margin: 8px;
       border: none;
@@ -18,7 +18,7 @@ app-charts {
       transition: all .15s ease;
       cursor: pointer;
     }
-    .go-btn:focus {    outline: 0px;}
+    .go-btn:focus, input:focus, select:focus {    outline: 0px;}
     
     button:hover {
       box-shadow: 0 3px 6px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.1);
@@ -26,7 +26,7 @@ app-charts {
     }
     .events-widget {
       display: block;
-      border: 1px solid #569ff7;
+      border: 1px solid #cb1f3d;
       padding: 0px 15px 15px;
     
 
@@ -42,7 +42,7 @@ app-charts {
     // .events-widget .wid-block:after {
     //   content: '';
     // display: block;
-    // background: #569ff7;
+    // background: #cb1f3d;
     // height: 200px;
     // width: 2px;
     // position: absolute;
@@ -58,7 +58,16 @@ app-charts {
 
     }
     .events-widget .widget-block-1 label {    margin-bottom: 10px;font-size: 12px;}
-    .events-widget .widget-block-1 input {display: inline-block;font-size: 12px;margin-right:40px;}
+    .events-widget .widget-block-1 input {display: inline-block;font-size: 12px;margin-right:40px;    
+    // border-color: #cb1f3d;
+    // border-width: 1px;
+    // border: 1px solid #cb1f3d;
+        border-top: 0px;
+    border-right: 0px;
+    border-left: 0px;
+    width: auto;
+    border-bottom: 1px solid #cb1f3d;
+    }
     .events-widget .widget-block-1 label .text-label  {
       
     display: inline-block;
@@ -144,7 +153,7 @@ app-charts {
   transition: all 0.5s ease-out 0s;
   background: #fff;
   border: none;
-  border: 1px solid #7db5f9;
+  border: 1px solid #cb1f3d;
   color: #fff;
   cursor: pointer;
   display: inline-block;
@@ -157,7 +166,7 @@ app-charts {
   // background: #9faab7;
 }
 .option-input:checked {
-  background: #7db5f9;
+  background: #fff;
 }
 .option-input:checked::before {
   height: 20px;
@@ -168,12 +177,13 @@ app-charts {
   font-size: 14px;
   text-align: center;
   line-height: 20px;
+  color:#cb1f3d;
 }
 .option-input:checked::after {
   -webkit-animation: click-wave 0.5s;
   -moz-animation: click-wave 0.5s;
   animation: click-wave 0.5s;
-  background: #7db5f9;
+  background: #cb1f3d;
   content: '';
   display: block;
   position: relative;
@@ -194,25 +204,59 @@ app-charts {
       
     }
      .events-widget .widget-block-3 .radio-group  label input[type="text"]{
-    padding-left: 3px;
+        border-top: 0px;
+    border-right: 0px;
+    border-left: 0px;
+    padding-left:3px;
+    width: auto;
+    border-bottom: 1px solid #cb1f3d;
+    //     border-color: #cb1f3d;
+    // border-width: 1px;
+    // border: 1px solid #cb1f3d;
+     }.events-widget .widget-block-3 .radio-group  label input[type="text"]:disabled {
+     background: #ffcad3;
      }
     .events-widget .widget-block-3 .radio-group  label select{
       display: inline-block;
     font-size: 12px;
-    width: 134px;
+    width: 130px;
     line-height: 21px;
     height: 21px;
+        border-top: 0px;
+    border-right: 0px;
+    border-left: 0px;
+    
+    border-bottom: 1px solid #cb1f3d;
+    //     border-color: #cb1f3d;
+    // border-width: 1px;
+    // border: 1px solid #cb1f3d;
+    }
+    .logo {
+      display: block;
+    text-align: center;
+    width: 200px;
+    margin: 15px auto 0px;
+    padding: 0px;
+    }
+    .logo img {
+      width: 100%;
+    text-align: center;
     }
     .go-btn {
-          border-radius: 50%;
-    height: 40px;
-    width: 40px;
-    border: 0px;
-    background: #7db5f9;
-    color: #fff;
+             border-radius: 7px;
+    height: 30px;
+    width: 80px;
+    border: 1px solid #cb1f3d;
+    color: #cb1f3d;
     text-transform: uppercase;
-    font-weight: bold; 
+    font-weight: bold;
     cursor: pointer;
+    background: #fff;
+    }
+    .go-btn:hover {
+      background: #cb1f3d;
+      color:#fff;
+      transition: 0.5s all;
     }
     .events-widget .widget-block-3 .radio-group  label .label-text {
       display: inline-block;
@@ -238,7 +282,7 @@ app-charts {
       display: block;
       height: 1px;
       width: 80px;
-      background: #569ff7;
+      // background: #cb1f3d;
       position: absolute;
       bottom: -5px;
       left: 0px;
@@ -263,12 +307,12 @@ app-charts {
 
     }
     .price-table th {
-          background: #7db5f9;
+          background: #cb1f3d;
     color: #fff;
     }
     .price-table th, td {
 
-  border: 1px solid #7db5f9;
+  border: 1px solid #cb1f3d;
     text-align: left;
     padding: 5px;
     font-size:12px;
