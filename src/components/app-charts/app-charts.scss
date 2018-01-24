@@ -119,6 +119,13 @@ app-charts {
       margin-bottom: 5px;
       font-size: 12px;
     }
+    .chart-wrapper {
+      width: 33.33%;
+    float: left;
+    display: block;
+    padding: 0px;
+    margin: 50px auto;
+    }
  
 
 @keyframes click-wave {
@@ -325,6 +332,9 @@ app-charts {
     .col-block {display: block;padding:0px;}
     h3 {font-size: 14px;margin-bottom: 0px;}
 
+@media only screen and (max-width: 768px) {
+  .chart-wrapper canvas {height:350px!important;}
+}
     @media only screen and (max-width: 768px) {
       .events-widget .widget-block-1 label {display: block;margin-bottom:10px; }
       .events-widget .widget-block-1 label .text-label {width:110px;}
@@ -341,6 +351,10 @@ app-charts {
       .events-widget .widget-block-4 {
         width:100%;
       }
+       .chart-wrapper {
+      width: 100%;
+    float: none;
+    }
       .chart-block .chart-wrapper {width:100%;}
       .price-table th {font-weight: bold;}
       .price-table th, td {font-size:10px;}
