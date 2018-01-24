@@ -219,13 +219,15 @@ app-charts {
     .events-widget .widget-block-3 .radio-group  label select{
       display: inline-block;
     font-size: 12px;
+    -webkit-appearance: none;
     width: 130px;
     line-height: 21px;
     height: 21px;
-        border-top: 0px;
+    background: url(assets/images/down.png) no-repeat right #fff;
+    background-size: 20px auto;
+    border-top: 0px;
     border-right: 0px;
     border-left: 0px;
-    
     border-bottom: 1px solid #cb1f3d;
     //     border-color: #cb1f3d;
     // border-width: 1px;
