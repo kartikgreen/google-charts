@@ -72,7 +72,6 @@ export class AppCharts {
         <app-charts-events-form></app-charts-events-form>
         <div style={{ display: this.showCharts ? 'block' : 'none' }} class="chart-wrapper"><canvas id="pie-chart1"></canvas></div>
         <div style={{ display: this.showCharts ? 'block' : 'none' }} class="chart-wrapper"><canvas id="pie-chart2"></canvas></div>
-        <div style={{ display: this.showCharts ? 'block' : 'none' }} class="chart-wrapper"><canvas id="pie-chart3"></canvas></div>
         <div class="claerfix"></div>
         
         <div>
