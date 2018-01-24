@@ -201,7 +201,7 @@ export class AppChartsEventForm {
     return (
        <div>
          <div class="events-widget">
-           <div class="logo"><img src="assets/images/logo.png" alt="global logo" /></div>
+           <div class="logo"><img src="/assets/images/logo.png" alt="global logo" /></div>
         <form onSubmit={(e) => this.handleSubmit(e)}>
           <div class="widget-block-1">
            <h4>Run an Event Count</h4>

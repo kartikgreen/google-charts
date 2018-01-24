@@ -3,7 +3,7 @@ app-charts {
       padding: 10px;
     }
     button {
-      background: #cb1f3d;
+      background: #959ea9;
       color: white;
       margin: 8px;
       border: none;
@@ -26,7 +26,7 @@ app-charts {
     }
     .events-widget {
       display: block;
-      border: 1px solid #cb1f3d;
+      border: 1px solid #959ea9;
       padding: 0px 15px 15px;
     
 
@@ -42,7 +42,7 @@ app-charts {
     // .events-widget .wid-block:after {
     //   content: '';
     // display: block;
-    // background: #cb1f3d;
+    // background: #959ea9;
     // height: 200px;
     // width: 2px;
     // position: absolute;
@@ -59,14 +59,14 @@ app-charts {
     }
     .events-widget .widget-block-1 label {    margin-bottom: 10px;font-size: 12px;}
     .events-widget .widget-block-1 input {display: inline-block;font-size: 12px;margin-right:40px;    
-    // border-color: #cb1f3d;
+    // border-color: #959ea9;
     // border-width: 1px;
-    // border: 1px solid #cb1f3d;
+    // border: 1px solid #959ea9;
         border-top: 0px;
     border-right: 0px;
     border-left: 0px;
     width: auto;
-    border-bottom: 1px solid #cb1f3d;
+    border-bottom: 1px solid #959ea9;
     }
     .events-widget .widget-block-1 label .text-label  {
       
@@ -160,7 +160,7 @@ app-charts {
   transition: all 0.5s ease-out 0s;
   background: #fff;
   border: none;
-  border: 1px solid #cb1f3d;
+  border: 1px solid #959ea9;
   color: #fff;
   cursor: pointer;
   display: inline-block;
@@ -184,13 +184,13 @@ app-charts {
   font-size: 14px;
   text-align: center;
   line-height: 20px;
-  color:#cb1f3d;
+  color:#959ea9;
 }
 .option-input:checked::after {
   -webkit-animation: click-wave 0.5s;
   -moz-animation: click-wave 0.5s;
   animation: click-wave 0.5s;
-  background: #cb1f3d;
+  background: #959ea9;
   content: '';
   display: block;
   position: relative;
@@ -216,12 +216,12 @@ app-charts {
     border-left: 0px;
     padding-left:3px;
     width: auto;
-    border-bottom: 1px solid #cb1f3d;
-    //     border-color: #cb1f3d;
+    border-bottom: 1px solid #959ea9;
+    //     border-color: #959ea9;
     // border-width: 1px;
-    // border: 1px solid #cb1f3d;
+    // border: 1px solid #959ea9;
      }.events-widget .widget-block-3 .radio-group  label input[type="text"]:disabled {
-     background: #ffcad3;
+    //  background: #ffcad3;
      }
     .events-widget .widget-block-3 .radio-group  label select{
       display: inline-block;
@@ -235,10 +235,10 @@ app-charts {
     border-top: 0px;
     border-right: 0px;
     border-left: 0px;
-    border-bottom: 1px solid #cb1f3d;
-    //     border-color: #cb1f3d;
+    border-bottom: 1px solid #959ea9;
+    //     border-color: #959ea9;
     // border-width: 1px;
-    // border: 1px solid #cb1f3d;
+    // border: 1px solid #959ea9;
     }
     .logo {
       display: block;
@@ -263,7 +263,7 @@ app-charts {
     background: #fff;
     }
     .go-btn:hover {
-      background: #cb1f3d;
+      background:#cb1f3d;
       color:#fff;
       transition: 0.5s all;
     }
@@ -299,7 +299,7 @@ app-charts {
     }
     .clearfix {clear:both;padding:0px;}
     .chart-block {
-      border: 1px solid #ddd;
+      border: 1px solid #959ea9;
       padding: 25px;
           margin-top: 50px;
 
@@ -317,12 +317,12 @@ app-charts {
 
     }
     .price-table th {
-          background: #cb1f3d;
+          background: #959ea9;
     color: #fff;
     }
     .price-table th, td {
 
-  border: 1px solid #cb1f3d;
+  border: 1px solid #959ea9;
     text-align: left;
     padding: 5px;
     font-size:12px;

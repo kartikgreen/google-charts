@@ -1,5 +1,7 @@
 import { Component, Prop, State, Element, Listen  } from '@stencil/core';
-import Chart from 'chart.js';
+import Highcharts from 'highcharts';
+import Highcharts3d from 'highcharts/highcharts-3d';
+Highcharts3d(Highcharts);
 
 @Component({
   tag: 'app-charts',
@@ -48,33 +50,61 @@ export class AppCharts {
     }]
   };
   componentDidLoad() {
-    this.createPieChart(this.datas, 'pie-chart1');
-    this.createPieChart(this.datas, 'pie-chart2');
-    this.createPieChart(this.datas, 'pie-chart3');
+    this.createPieChart('container1');
+    this.createPieChart('container2');
   }
-  createPieChart(datas, elementId) {
-      new Chart(document.getElementById(elementId), {
-        type: 'pie',
-        data: datas,
-        options: {
-            title: {
-              display: true,
-              text: 'Predicted world population (millions) in 2050',
-              responsive: true,
-              maintainAspectRatio: false,
-            }
-        }
-    });
+  createPieChart(element) {
+     Highcharts.setOptions({
+colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5']
+});
+Highcharts.chart(element, {
+credits: false,
+chart: {
+type: 'pie',
+options3d: {
+enabled: true,
+alpha: 45
+},
+},
+title: {
+text: 'Events data'
+},
+tooltip: {
+pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+},
+plotOptions: {
+pie: {
+allowPointSelect: true,
+cursor: 'pointer',
+depth: 35,
+dataLabels: {
+enabled: true,
+format: '{point.name}'
+}
+}
+},
+series: [{
+type: 'pie',
+name: 'Events share',
+data: [
+['Sports', 45.0],
+['Politics', 26.8],
+['Business', 8.5],
+['Entertainment', 6.2],
+['Business', 0.7]
+]
+}]
+});
   }
   render() {
     return (
       <div>
         <app-charts-events-form></app-charts-events-form>
-        <div style={{ display: this.showCharts ? 'block' : 'none' }} class="chart-wrapper"><canvas id="pie-chart1"></canvas></div>
-        <div style={{ display: this.showCharts ? 'block' : 'none' }} class="chart-wrapper"><canvas id="pie-chart2"></canvas></div>
+   <div style={{ display: this.showCharts ? 'block' : 'none' }} id="container1" class="chart-wrapper"></div>
+   <div style={{ display: this.showCharts ? 'block' : 'none' }} id="container2" class="chart-wrapper"></div>
         <div class="claerfix"></div>
         
-        <div>
+        <div style={{ display: this.showCharts ? 'block' : 'none' }}>
         
           <h3>Plans</h3>
           <table class="price-table">
