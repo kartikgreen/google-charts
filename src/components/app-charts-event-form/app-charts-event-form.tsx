@@ -1,5 +1,5 @@
 import { Component, Prop, State, Element, Event, EventEmitter  } from '@stencil/core';
-import flatpickr from "flatpickr";
+import * as flatpickr from 'flatpickr';
 @Component({
   tag: 'app-charts-events-form',
   styleUrl: 'app-charts-event-form.scss'

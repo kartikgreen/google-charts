@@ -1,14 +1,16 @@
 import { Component, Prop, State, Element, Listen  } from '@stencil/core';
-import Highcharts from 'highcharts';
-import Highcharts3d from 'highcharts/highcharts-3d';
-Highcharts3d(Highcharts);
-
+import 'https://www.gstatic.com/charts/loader.js';
+declare var google: any;
 @Component({
   tag: 'app-charts',
   styleUrl: 'app-charts.scss'
 })
 
 export class AppCharts {
+  constructor() {
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(this.createPieChart());
+  }
   @Element() hostElement: HTMLElement;
   @State() selectCountry: number;
   @State() selectRegion: number;
@@ -50,58 +52,33 @@ export class AppCharts {
     }]
   };
   componentDidLoad() {
-    this.createPieChart('container1');
-    this.createPieChart('container2');
+    this.createPieChart();
   }
-  createPieChart(element) {
-     Highcharts.setOptions({
-colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5']
-});
-Highcharts.chart(element, {
-credits: false,
-chart: {
-type: 'pie',
-options3d: {
-enabled: true,
-alpha: 45
-},
-},
-title: {
-text: 'Events data'
-},
-tooltip: {
-pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-},
-plotOptions: {
-pie: {
-allowPointSelect: true,
-cursor: 'pointer',
-depth: 35,
-dataLabels: {
-enabled: true,
-format: '{point.name}'
-}
-}
-},
-series: [{
-type: 'pie',
-name: 'Events share',
-data: [
-['Sports', 45.0],
-['Politics', 26.8],
-['Business', 8.5],
-['Entertainment', 6.2],
-['Business', 0.7]
-]
-}]
-});
+  createPieChart() {
+          // function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+              ['Task', 'Hours per Day'],
+              ['Work',     11],
+              ['Eat',      2],
+              ['Commute',  2],
+              ['Watch TV', 2],
+              ['Sleep',    7]
+            ]);
+    
+            var options = {
+              title: 'My Daily Activities'
+            };
+    
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+    
+            chart.draw(data, options);
+          // }
   }
   render() {
     return (
       <div>
         <app-charts-events-form></app-charts-events-form>
-   <div style={{ display: this.showCharts ? 'block' : 'none' }} id="container1" class="chart-wrapper"></div>
-   <div style={{ display: this.showCharts ? 'block' : 'none' }} id="container2" class="chart-wrapper"></div>
+        <div style={{ display: this.showCharts ? 'block' : 'none' }} class="chart-wrapper" id="piechart"></div>
         <div class="claerfix"></div>
         
         <div style={{ display: this.showCharts ? 'block' : 'none' }}>
