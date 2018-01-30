@@ -3,7 +3,7 @@ app-charts {
       padding: 10px;
     }
     button {
-      background: #959ea9;
+      background: #ff8300;
       color: white;
       margin: 8px;
       border: none;
@@ -26,7 +26,7 @@ app-charts {
     }
     .events-widget {
       display: block;
-      border: 1px solid #959ea9;
+      border: 1px solid #ff8300;
       padding: 0px 15px 15px;
     
 
@@ -42,7 +42,7 @@ app-charts {
     // .events-widget .wid-block:after {
     //   content: '';
     // display: block;
-    // background: #959ea9;
+    // background: #ff8300;
     // height: 200px;
     // width: 2px;
     // position: absolute;
@@ -59,14 +59,14 @@ app-charts {
     }
     .events-widget .widget-block-1 label {    margin-bottom: 10px;font-size: 12px;}
     .events-widget .widget-block-1 input {display: inline-block;font-size: 12px;margin-right:40px;    
-    // border-color: #959ea9;
+    // border-color: #ff8300;
     // border-width: 1px;
-    // border: 1px solid #959ea9;
+    // border: 1px solid #ff8300;
         border-top: 0px;
     border-right: 0px;
     border-left: 0px;
     width: auto;
-    border-bottom: 1px solid #959ea9;
+    border-bottom: 1px solid #ff8300;
     }
     .events-widget .widget-block-1 label .text-label  {
       
@@ -160,7 +160,7 @@ app-charts {
   transition: all 0.5s ease-out 0s;
   background: #fff;
   border: none;
-  border: 1px solid #959ea9;
+  border: 1px solid #ff8300;
   color: #fff;
   cursor: pointer;
   display: inline-block;
@@ -184,13 +184,13 @@ app-charts {
   font-size: 14px;
   text-align: center;
   line-height: 20px;
-  color:#959ea9;
+  color:#ff8300;
 }
 .option-input:checked::after {
   -webkit-animation: click-wave 0.5s;
   -moz-animation: click-wave 0.5s;
   animation: click-wave 0.5s;
-  background: #959ea9;
+  background: #ff8300;
   content: '';
   display: block;
   position: relative;
@@ -216,10 +216,10 @@ app-charts {
     border-left: 0px;
     padding-left:3px;
     width: auto;
-    border-bottom: 1px solid #959ea9;
-    //     border-color: #959ea9;
+    border-bottom: 1px solid #ff8300;
+    //     border-color: #ff8300;
     // border-width: 1px;
-    // border: 1px solid #959ea9;
+    // border: 1px solid #ff8300;
      }.events-widget .widget-block-3 .radio-group  label input[type="text"]:disabled {
     //  background: #ffcad3;
      }
@@ -230,16 +230,17 @@ app-charts {
     width: 130px;
     line-height: 21px;
     height: 21px;
-    background: url(assets/images/down.png) no-repeat right #fff;
+    background: url(assets/images/down.png) no-repeat right transparent;
     background-size: 20px auto;
     border-top: 0px;
     border-right: 0px;
     border-left: 0px;
-    border-bottom: 1px solid #959ea9;
-    //     border-color: #959ea9;
+    border-bottom: 1px solid #ff8300;
+    //     border-color: #ff8300;
     // border-width: 1px;
-    // border: 1px solid #959ea9;
+    // border: 1px solid #ff8300;
     }
+     .widget-block-3 .radio-group label select:disabled {background: rgb(235, 235, 228)!important;}
     .logo {
       display: block;
     text-align: center;
@@ -255,15 +256,15 @@ app-charts {
              border-radius: 7px;
     height: 30px;
     width: 80px;
-    border: 1px solid #cb1f3d;
-    color: #cb1f3d;
+    border: 1px solid #ff8300;
+    color: #ff8300;
     text-transform: uppercase;
     font-weight: bold;
     cursor: pointer;
     background: #fff;
     }
     .go-btn:hover {
-      background:#cb1f3d;
+      background:#ff8300;
       color:#fff;
       transition: 0.5s all;
     }
@@ -292,14 +293,14 @@ app-charts {
       display: block;
       height: 1px;
       width: 80px;
-      // background: #cb1f3d;
+      // background: #ff8300;
       position: absolute;
       bottom: -5px;
       left: 0px;
     }
     .clearfix {clear:both;padding:0px;}
     .chart-block {
-      border: 1px solid #959ea9;
+      border: 1px solid #ff8300;
       padding: 25px;
           margin-top: 50px;
 
@@ -317,12 +318,12 @@ app-charts {
 
     }
     .price-table th {
-          background: #959ea9;
+          background: #ff8300;
     color: #fff;
     }
     .price-table th, td {
 
-  border: 1px solid #959ea9;
+  border: 1px solid #ff8300;
     text-align: left;
     padding: 5px;
     font-size:12px;

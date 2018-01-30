@@ -4,7 +4,6 @@ declare var google: any;
   tag: 'app-charts',
   styleUrl: 'app-charts.scss'
 })
-
 export class AppCharts {
   @Element() hostElement: HTMLElement;
   @State() selectCountry: number;

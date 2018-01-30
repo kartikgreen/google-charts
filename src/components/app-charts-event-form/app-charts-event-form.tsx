@@ -41,13 +41,13 @@ export class AppChartsEventForm {
     }]
   };
   componentDidLoad() {
-    this.createDatePicker('fromDatepicker');
-    this.createDatePicker('toDatepicker');
+    this.createDatePicker('#fromDatepicker');
+    this.createDatePicker('#toDatepicker');
     // fetch('https://jsonplaceholder.typicode.com/posts').then((res) => res.json())
     //   .then((data) => {console.log(data)});
   }
   createDatePicker(element) {
-    flatpickr(document.getElementById(element), {
+    flatpickr(this.hostElement.querySelectorAll(element), {
       enableTime: false,
       dateFormat: "Y-m-d",
     });
