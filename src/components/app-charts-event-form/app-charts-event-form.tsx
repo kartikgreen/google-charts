@@ -52,6 +52,25 @@ export class AppChartsEventForm {
       dateFormat: "Y-m-d",
     });
   }
+  getPayload() {
+    const payLoad = {
+      region: this.selectRegion, 
+      country: this.selectCountry,
+      fromDate: this.fromDate,
+      toDate: this.toDate,
+      zip: this.zip,
+      city: this.city,
+      addressOne: this.addressOne,
+      addressTwo: this.addressTwo,
+      categories: this.categoriesSelected,
+      global: this.global
+    }
+    const restrictedValues = ["", null, -1];
+    return Object.keys(payLoad).reduce(function(r, e) {
+      if (!restrictedValues.includes(payLoad[e])) r[e] = payLoad[e]
+      return r;
+    }, {})
+  }
   handleSubmit(e) {
     fetch('/post', {
       method: 'POST',
@@ -59,17 +78,7 @@ export class AppChartsEventForm {
         'Accept': 'application/json, text/plain, */*',
         'Content-type': 'application/json'
       },
-      body: JSON.stringify({region: this.selectRegion, 
-                            country: this.selectCountry,
-                            fromDate: this.fromDate,
-                            toDate: this.toDate,
-                            zip: this.zip,
-                            city: this.city,
-                            addressOne: this.addressOne,
-                            addressTwo: this.addressTwo,
-                            categories: this.categoriesSelected,
-                            global: this.global
-                          })
+      body: JSON.stringify(this.getPayload())
     }).then((res)=> res.json())
       .then((data)=> console.log('data'));
       this.onSubmit.emit({ answer: true });  
@@ -114,12 +123,12 @@ export class AppChartsEventForm {
       this.addAttribute('#zip', 'disabled');
       this.addAttribute('#address_one', 'disabled');
       this.addAttribute('#address_two', 'disabled');
-      this.selectCountry = -1,
-      this.city = -1,
-      this.addressOne = -1,
-      this.addressTwo = -1,
-      this.zip = -1
-      this.selectRegion = -1
+      this.selectCountry = null,
+      this.city = null,
+      this.addressOne = null,
+      this.addressTwo = null,
+      this.zip = null
+      this.selectRegion = null
     }
     if (event.target.value === 'region') {
       this.global = false;
@@ -129,11 +138,11 @@ export class AppChartsEventForm {
       this.addAttribute('#zip', 'disabled');
       this.addAttribute('#address_one', 'disabled');
       this.addAttribute('#address_two', 'disabled');
-      this.selectCountry = -1,
-      this.city = -1,
-      this.addressOne = -1,
-      this.addressTwo = -1,
-      this.zip = -1
+      this.selectCountry = null,
+      this.city = null,
+      this.addressOne = null,
+      this.addressTwo = null,
+      this.zip = null
     }
     if (event.target.value === 'country') {
       this.global = false;
@@ -143,11 +152,11 @@ export class AppChartsEventForm {
       this.addAttribute('#zip', 'disabled');
       this.addAttribute('#address_one', 'disabled');
       this.addAttribute('#address_two', 'disabled');
-      this.selectRegion = -1,
-      this.city = -1,
-      this.addressOne = -1,
-      this.addressTwo = -1,
-      this.zip = -1
+      this.selectRegion = null,
+      this.city = null,
+      this.addressOne = null,
+      this.addressTwo = null,
+      this.zip = null
     }
     if (event.target.value === 'city') {
       this.global = false;
@@ -157,11 +166,11 @@ export class AppChartsEventForm {
       this.addAttribute('#zip', 'disabled');
       this.addAttribute('#address_one', 'disabled');
       this.addAttribute('#address_two', 'disabled');
-      this.selectRegion = -1,
-      this.addressOne = -1,
-      this.addressTwo = -1,
-      this.zip = -1,
-      this.selectCountry = -1
+      this.selectRegion = null,
+      this.addressOne = null,
+      this.addressTwo = null,
+      this.zip = null,
+      this.selectCountry = null
     }
     if (event.target.value === 'address') {
       this.global = false;
@@ -171,8 +180,8 @@ export class AppChartsEventForm {
       this.deleteAttribute('#zip', 'disabled');
       this.deleteAttribute('#address_one', 'disabled');
       this.deleteAttribute('#address_two', 'disabled');
-      this.selectRegion = -1,
-      this.city = -1
+      this.selectRegion = null,
+      this.city = null
     }
   }
   deleteAttribute(element, attribute) {

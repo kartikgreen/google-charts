@@ -1,5 +1,4 @@
 import { Component, Prop, State, Element, Listen  } from '@stencil/core';
-import 'https://www.gstatic.com/charts/loader.js';
 declare var google: any;
 @Component({
   tag: 'app-charts',
@@ -7,10 +6,6 @@ declare var google: any;
 })
 
 export class AppCharts {
-  constructor() {
-    google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback(this.createPieChart());
-  }
   @Element() hostElement: HTMLElement;
   @State() selectCountry: number;
   @State() selectRegion: number;
@@ -52,35 +47,38 @@ export class AppCharts {
     }]
   };
   componentDidLoad() {
-    this.createPieChart();
+    this.createPieChart('piechart1');
+    this.createPieChart('piechart2');
   }
-  createPieChart() {
-          // function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-              ['Task', 'Hours per Day'],
-              ['Work',     11],
-              ['Eat',      2],
-              ['Commute',  2],
-              ['Watch TV', 2],
-              ['Sleep',    7]
-            ]);
-    
-            var options = {
-              title: 'My Daily Activities'
-            };
-    
-            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-    
-            chart.draw(data, options);
-          // }
+  createPieChart(element) {
+    google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Events', 'Run an event count'],
+          ['Politics',     11],
+          ['Sports',      2],
+          ['Travels',  2]
+        ]);
+
+        var options = {
+          title: 'My Daily Activities'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById(element));
+
+        chart.draw(data, options);
+      }
   }
   render() {
     return (
       <div>
         <app-charts-events-form></app-charts-events-form>
-        <div style={{ display: this.showCharts ? 'block' : 'none' }} class="chart-wrapper" id="piechart"></div>
+        <div style={{ display: this.showCharts ? 'block' : 'none' }} class="chart-wrapper" id="piechart1"></div>
+        <div style={{ display: this.showCharts ? 'block' : 'none' }} class="chart-wrapper" id="piechart2"></div>
         <div class="claerfix"></div>
-        
         <div style={{ display: this.showCharts ? 'block' : 'none' }}>
         
           <h3>Plans</h3>
